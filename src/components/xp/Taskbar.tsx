@@ -7,9 +7,10 @@ interface TaskbarProps {
   activeWindow: string | null;
   onWindowClick: (id: string) => void;
   onLogout?: () => void;
+  onOpenWindow?: (id: string) => void;
 }
 
-export const Taskbar = ({ openWindows, activeWindow, onWindowClick, onLogout }: TaskbarProps) => {
+export const Taskbar = ({ openWindows, activeWindow, onWindowClick, onLogout, onOpenWindow }: TaskbarProps) => {
   const [time, setTime] = useState(new Date());
   const [startMenuOpen, setStartMenuOpen] = useState(false);
 
@@ -24,7 +25,7 @@ export const Taskbar = ({ openWindows, activeWindow, onWindowClick, onLogout }: 
 
   return (
     <>
-      {startMenuOpen && <StartMenu onClose={() => setStartMenuOpen(false)} />}
+      {startMenuOpen && <StartMenu onClose={() => setStartMenuOpen(false)} onOpenWindow={onOpenWindow} />}
       <div className="xp-taskbar fixed bottom-0 left-0 right-0 h-11 flex items-center px-1 z-50">
         {/* Start Button */}
         <button
