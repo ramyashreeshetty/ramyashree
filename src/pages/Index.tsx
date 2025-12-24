@@ -97,8 +97,8 @@ const Index = () => {
         backgroundPosition: "center",
       }}
     >
-      {/* Desktop Icons - grid layout to fit all on screen */}
-      <div className="p-3 grid grid-cols-2 gap-1 w-fit">
+      {/* Desktop Icons - single column, stays above taskbar */}
+      <div className="absolute top-2 left-2 bottom-14 flex flex-col flex-wrap gap-1 content-start">
         {DESKTOP_ICONS.map((icon) => (
           <DesktopIcon
             key={icon.id}
