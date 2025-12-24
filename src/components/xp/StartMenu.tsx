@@ -1,4 +1,4 @@
-import { User, FolderOpen, Briefcase, Heart, Telescope, Mail, Github, Linkedin, X } from "lucide-react";
+import { Sparkles, FolderOpen, Briefcase, Heart, Telescope, Mail, Github, Linkedin, X } from "lucide-react";
 
 interface StartMenuProps {
   onClose: () => void;
@@ -7,7 +7,7 @@ interface StartMenuProps {
 
 export const StartMenu = ({ onClose, onOpenWindow }: StartMenuProps) => {
   const menuItems = [
-    { id: "about", icon: <User className="w-8 h-8" />, label: "About Me", description: "Learn about Ramyashree" },
+    { id: "about", icon: <Sparkles className="w-8 h-8" />, label: "About Me", description: "Learn about Ramyashree" },
     { id: "projects", icon: <FolderOpen className="w-8 h-8" />, label: "Projects", description: "View my work" },
     { id: "hobbies", icon: <Heart className="w-8 h-8" />, label: "Hobbies", description: "What I love" },
     { id: "experience", icon: <Briefcase className="w-8 h-8" />, label: "Experience", description: "My journey" },
