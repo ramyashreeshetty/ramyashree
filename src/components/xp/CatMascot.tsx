@@ -3,18 +3,18 @@ import { X } from "lucide-react";
 import { playSound } from "./SoundManager";
 
 const TIPS = [
-  "Meow! I'm here to help~ Did you know Ramya loves learning new languages? 🌍",
-  "Try clicking on the desktop icons to open windows! *purr*",
-  "Check out the Flower Garden - you can plant your own flowers! 🌸",
-  "Ramya is a Data Engineer who loves turning chaos into insights!",
-  "The music player has some chill lo-fi beats~ 🎵",
-  "Ramya's curious mind means she's always exploring new ideas! ✨",
-  "Click the Start menu to see quick links to GitHub and LinkedIn!",
-  "Drag the windows around - they're fully interactive! *meow*",
-  "Ramya loves anime - ask her about her favorites! 🎌",
-  "This portfolio was built with React and lots of love~ 💕",
-  "Gaming is one of Ramya's favorite ways to unwind! 🎮",
-  "Pro tip: You can minimize windows to the taskbar! *nyaa~*",
+  "Meow~ Did you know Ramyashree loves learning new languages?",
+  "Try clicking on the desktop icons to open windows!",
+  "Check out the Flower Garden - you can plant your own flowers!",
+  "Ramyashree is a Data Engineer who loves turning chaos into insights!",
+  "The music player has some chill lo-fi beats~",
+  "Curious minds are always exploring new ideas!",
+  "Click the Start menu to see quick links!",
+  "Drag the windows around - they're fully interactive!",
+  "Ramyashree loves anime - ask her about her favorites!",
+  "This portfolio was built with React and lots of love~",
+  "Gaming is a favorite way to unwind!",
+  "Pro tip: You can minimize windows to the taskbar!",
 ];
 
 export const CatMascot = () => {
@@ -29,7 +29,7 @@ export const CatMascot = () => {
 
     const interval = setInterval(() => {
       showRandomTip();
-    }, 45000 + Math.random() * 15000);
+    }, 50000 + Math.random() * 20000);
 
     return () => {
       clearTimeout(initialTimer);
@@ -54,77 +54,83 @@ export const CatMascot = () => {
   };
 
   return (
-    <div className="fixed bottom-14 left-4 z-40 flex flex-col items-start gap-2">
+    <div className="fixed bottom-16 right-4 z-40 flex flex-col items-end gap-2">
       {/* Speech Bubble */}
       {tipVisible && currentTip && (
-        <div className="animate-speech-bubble relative bg-card border-2 border-pink-200 rounded-2xl p-3 shadow-lg max-w-[250px]">
+        <div className="animate-speech-bubble relative bg-card border border-border rounded-xl p-3 shadow-lg max-w-[220px]">
           <button
             onClick={dismissTip}
-            className="absolute -top-2 -right-2 w-5 h-5 bg-pink-400 text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform"
+            className="absolute -top-2 -right-2 w-5 h-5 bg-muted-foreground/60 text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform"
           >
             <X className="w-3 h-3" />
           </button>
           <p className="text-sm text-foreground">{currentTip}</p>
           {/* Speech bubble tail */}
-          <div className="absolute -bottom-2 left-6 w-4 h-4 bg-card border-r-2 border-b-2 border-pink-200 transform rotate-45" />
+          <div className="absolute -bottom-2 right-8 w-4 h-4 bg-card border-r border-b border-border transform rotate-45" />
         </div>
       )}
 
-      {/* Cute Cat Mascot */}
+      {/* Lucky Cat Mascot - inspired by maneki-neko */}
       <button
         onClick={showRandomTip}
-        className={`hover:scale-110 transition-transform cursor-pointer ${
+        className={`hover:scale-105 transition-transform cursor-pointer ${
           isExcited ? "animate-bounce" : "animate-mascot-idle"
         }`}
         title="Click for a tip!"
       >
-        <svg width="64" height="64" viewBox="0 0 64 64" className="drop-shadow-lg">
+        <svg width="56" height="56" viewBox="0 0 64 64" className="drop-shadow-lg">
           {/* Body */}
-          <ellipse cx="32" cy="48" rx="18" ry="14" fill="#FFB6C1" />
+          <ellipse cx="32" cy="48" rx="16" ry="12" fill="#F5F5F5" stroke="#E0E0E0" strokeWidth="1" />
           
           {/* Head */}
-          <circle cx="32" cy="28" r="20" fill="#FFB6C1" />
+          <circle cx="32" cy="28" r="18" fill="#F5F5F5" stroke="#E0E0E0" strokeWidth="1" />
           
           {/* Ears */}
-          <path d="M14 16 L18 28 L8 24 Z" fill="#FFB6C1" />
-          <path d="M50 16 L46 28 L56 24 Z" fill="#FFB6C1" />
-          <path d="M15 18 L18 26 L11 23 Z" fill="#FFC0CB" />
-          <path d="M49 18 L46 26 L53 23 Z" fill="#FFC0CB" />
+          <path d="M16 18 L20 28 L12 24 Z" fill="#F5F5F5" stroke="#E0E0E0" strokeWidth="1" />
+          <path d="M48 18 L44 28 L52 24 Z" fill="#F5F5F5" stroke="#E0E0E0" strokeWidth="1" />
+          {/* Inner ears */}
+          <path d="M17 20 L19 26 L14 23 Z" fill="#3B5998" />
+          <path d="M47 20 L45 26 L50 23 Z" fill="#3B5998" />
           
-          {/* Face */}
-          {/* Eyes */}
-          <ellipse cx="24" cy="26" rx="4" ry="5" fill="#2D2D2D" />
-          <ellipse cx="40" cy="26" rx="4" ry="5" fill="#2D2D2D" />
+          {/* Spots */}
+          <circle cx="22" cy="24" r="5" fill="#3B5998" opacity="0.8" />
+          <circle cx="42" cy="40" r="4" fill="#3B5998" opacity="0.6" />
           
-          {/* Eye shine */}
-          <circle cx="25" cy="24" r="1.5" fill="#FFFFFF" />
-          <circle cx="41" cy="24" r="1.5" fill="#FFFFFF" />
+          {/* Closed happy eyes */}
+          <path d="M24 26 Q26 24 28 26" stroke="#333" strokeWidth="2" fill="none" strokeLinecap="round" />
+          <path d="M36 26 Q38 24 40 26" stroke="#333" strokeWidth="2" fill="none" strokeLinecap="round" />
           
           {/* Nose */}
-          <ellipse cx="32" cy="32" rx="3" ry="2" fill="#FF69B4" />
+          <ellipse cx="32" cy="31" rx="2" ry="1.5" fill="#E8A0A0" />
           
           {/* Mouth */}
-          <path d="M32 34 Q28 38 26 36" stroke="#2D2D2D" strokeWidth="1.5" fill="none" />
-          <path d="M32 34 Q36 38 38 36" stroke="#2D2D2D" strokeWidth="1.5" fill="none" />
+          <path d="M32 32 Q29 35 27 33" stroke="#333" strokeWidth="1.2" fill="none" />
+          <path d="M32 32 Q35 35 37 33" stroke="#333" strokeWidth="1.2" fill="none" />
           
-          {/* Whiskers */}
-          <line x1="10" y1="30" x2="20" y2="32" stroke="#2D2D2D" strokeWidth="1" />
-          <line x1="10" y1="34" x2="20" y2="34" stroke="#2D2D2D" strokeWidth="1" />
-          <line x1="10" y1="38" x2="20" y2="36" stroke="#2D2D2D" strokeWidth="1" />
-          <line x1="54" y1="30" x2="44" y2="32" stroke="#2D2D2D" strokeWidth="1" />
-          <line x1="54" y1="34" x2="44" y2="34" stroke="#2D2D2D" strokeWidth="1" />
-          <line x1="54" y1="38" x2="44" y2="36" stroke="#2D2D2D" strokeWidth="1" />
+          {/* Whiskers - subtle */}
+          <line x1="14" y1="30" x2="22" y2="31" stroke="#CCC" strokeWidth="0.8" />
+          <line x1="14" y1="33" x2="22" y2="33" stroke="#CCC" strokeWidth="0.8" />
+          <line x1="50" y1="30" x2="42" y2="31" stroke="#CCC" strokeWidth="0.8" />
+          <line x1="50" y1="33" x2="42" y2="33" stroke="#CCC" strokeWidth="0.8" />
           
           {/* Blush */}
-          <circle cx="18" cy="34" r="4" fill="#FF9999" opacity="0.5" />
-          <circle cx="46" cy="34" r="4" fill="#FF9999" opacity="0.5" />
+          <circle cx="22" cy="33" r="3" fill="#F8BABA" opacity="0.5" />
+          <circle cx="42" cy="33" r="3" fill="#F8BABA" opacity="0.5" />
+          
+          {/* Collar */}
+          <ellipse cx="32" cy="42" rx="10" ry="3" fill="#C62828" />
+          
+          {/* Bell */}
+          <circle cx="32" cy="45" r="3" fill="#FFD700" stroke="#B8860B" strokeWidth="0.5" />
+          <circle cx="32" cy="45" r="1" fill="#B8860B" />
           
           {/* Paws */}
-          <ellipse cx="22" cy="58" rx="6" ry="4" fill="#FFB6C1" />
-          <ellipse cx="42" cy="58" rx="6" ry="4" fill="#FFB6C1" />
+          <ellipse cx="24" cy="56" rx="5" ry="3" fill="#F5F5F5" stroke="#E0E0E0" strokeWidth="0.8" />
+          <ellipse cx="40" cy="56" rx="5" ry="3" fill="#F5F5F5" stroke="#E0E0E0" strokeWidth="0.8" />
           
           {/* Tail */}
-          <path d="M50 48 Q60 40 55 30" stroke="#FFB6C1" strokeWidth="6" fill="none" strokeLinecap="round" />
+          <path d="M48 48 Q55 42 52 34" stroke="#F5F5F5" strokeWidth="5" fill="none" strokeLinecap="round" />
+          <circle cx="52" cy="36" r="3" fill="#3B5998" opacity="0.6" />
         </svg>
       </button>
     </div>

@@ -23,11 +23,13 @@ export const StartMenu = ({ onClose }: StartMenuProps) => {
       <div className="relative bg-gradient-to-b from-primary to-primary/80 rounded-tr-lg shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-primary/90 to-primary border-b border-primary-foreground/20">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center text-xl">
-            👩‍💻
+          <div className="w-12 h-12 rounded-md bg-white p-0.5">
+            <div className="w-full h-full rounded-sm bg-gradient-to-br from-pink-200 to-blue-200 flex items-center justify-center text-xl">
+              👩‍💻
+            </div>
           </div>
           <div className="text-primary-foreground">
-            <div className="font-bold">Ramya</div>
+            <div className="font-bold">Ramyashree</div>
             <div className="text-sm opacity-80">Data Engineer</div>
           </div>
         </div>
