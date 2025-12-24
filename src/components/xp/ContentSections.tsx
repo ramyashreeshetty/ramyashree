@@ -10,7 +10,7 @@ export const AboutSection = () => (
         className="w-20 h-20 rounded-full object-cover border-2 border-primary/30 shrink-0"
       />
       <div>
-        <h2 className="text-2xl font-bold text-foreground">Hey, I'm Ramya!</h2>
+        <h2 className="text-2xl font-bold text-foreground">Hey, I'm Ramyashree!</h2>
         <p className="text-muted-foreground flex items-center gap-1">
           <MapPin className="w-4 h-4" /> Data Engineer & Curious Explorer
         </p>
