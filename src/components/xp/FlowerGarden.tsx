@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Flower2, Trash2, Sparkles } from "lucide-react";
 import { playSound } from "./SoundManager";
+import { supabase } from "@/integrations/supabase/client";
 
 interface FlowerData {
   id: string;
@@ -86,35 +87,122 @@ export const FlowerGarden = () => {
   const [selectedColor, setSelectedColor] = useState(FLOWER_COLORS[0]);
   const [selectedType, setSelectedType] = useState<"tulip" | "rose" | "daisy">("tulip");
   const [currentQuote, setCurrentQuote] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
+  // Load flowers from database
   useEffect(() => {
-    const saved = localStorage.getItem("flower-garden");
-    if (saved) {
-      setFlowers(JSON.parse(saved));
-    }
+    const fetchFlowers = async () => {
+      const { data, error } = await supabase
+        .from("flowers")
+        .select("*")
+        .order("created_at", { ascending: true });
+
+      if (error) {
+        console.error("Error fetching flowers:", error);
+      } else if (data) {
+        setFlowers(
+          data.map((f) => ({
+            id: f.id,
+            x: Number(f.x),
+            y: Number(f.y),
+            color: f.color,
+            type: f.type as "tulip" | "rose" | "daisy",
+            scale: Number(f.scale),
+          }))
+        );
+      }
+      setIsLoading(false);
+    };
+
+    fetchFlowers();
+
+    // Subscribe to realtime changes
+    const channel = supabase
+      .channel("flowers-realtime")
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "flowers",
+        },
+        (payload) => {
+          const newFlower = payload.new;
+          setFlowers((prev) => {
+            // Avoid duplicates
+            if (prev.some((f) => f.id === newFlower.id)) return prev;
+            return [
+              ...prev,
+              {
+                id: newFlower.id,
+                x: Number(newFlower.x),
+                y: Number(newFlower.y),
+                color: newFlower.color,
+                type: newFlower.type as "tulip" | "rose" | "daisy",
+                scale: Number(newFlower.scale),
+              },
+            ];
+          });
+        }
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "DELETE",
+          schema: "public",
+          table: "flowers",
+        },
+        () => {
+          // Refetch all flowers on delete (for clear garden)
+          supabase
+            .from("flowers")
+            .select("*")
+            .order("created_at", { ascending: true })
+            .then(({ data }) => {
+              if (data) {
+                setFlowers(
+                  data.map((f) => ({
+                    id: f.id,
+                    x: Number(f.x),
+                    y: Number(f.y),
+                    color: f.color,
+                    type: f.type as "tulip" | "rose" | "daisy",
+                    scale: Number(f.scale),
+                  }))
+                );
+              }
+            });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("flower-garden", JSON.stringify(flowers));
-  }, [flowers]);
-
-  const handleGardenClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleGardenClick = async (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
+    const scale = 0.8 + Math.random() * 0.4;
 
-    const newFlower: FlowerData = {
-      id: Date.now().toString(),
+    // Insert into database
+    const { error } = await supabase.from("flowers").insert({
       x,
       y,
       color: selectedColor,
       type: selectedType,
-      scale: 0.8 + Math.random() * 0.4,
-    };
+      scale,
+    });
 
-    setFlowers([...flowers, newFlower]);
+    if (error) {
+      console.error("Error planting flower:", error);
+      return;
+    }
+
     playSound("success");
-    
+
     // Show a random quote
     const quote = LIFE_QUOTES[Math.floor(Math.random() * LIFE_QUOTES.length)];
     setCurrentQuote(quote);
@@ -122,9 +210,17 @@ export const FlowerGarden = () => {
   };
 
   const clearGarden = () => {
-    setFlowers([]);
+    // Note: Clear is disabled for shared garden - only owner should clear
     playSound("click");
   };
+
+  if (isLoading) {
+    return (
+      <div className="h-full flex items-center justify-center">
+        <div className="animate-pulse text-muted-foreground">Loading garden...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-full flex flex-col">
@@ -174,14 +270,6 @@ export const FlowerGarden = () => {
             ))}
           </div>
         </div>
-
-        <button
-          onClick={clearGarden}
-          className="ml-auto flex items-center gap-1 px-3 py-1 text-sm bg-pink-100 text-pink-600 rounded-full hover:bg-pink-200"
-        >
-          <Trash2 className="w-4 h-4" />
-          Clear
-        </button>
       </div>
 
       {/* Garden Area */}
@@ -234,7 +322,7 @@ export const FlowerGarden = () => {
       </div>
 
       <div className="mt-2 text-sm text-muted-foreground text-center">
-        🌸 {flowers.length} flower{flowers.length !== 1 ? "s" : ""} planted • Your garden is saved automatically!
+        🌸 {flowers.length} flower{flowers.length !== 1 ? "s" : ""} planted by visitors • Plant yours!
       </div>
     </div>
   );
