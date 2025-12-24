@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { User, FolderOpen, Heart, Briefcase, Telescope, Mail, Flower2 } from "lucide-react";
+import { Sparkles, FolderOpen, Heart, Briefcase, Telescope, Mail, Flower2 } from "lucide-react";
 import { DesktopIcon } from "@/components/xp/DesktopIcon";
 import { XPWindow } from "@/components/xp/XPWindow";
 import { Taskbar } from "@/components/xp/Taskbar";
@@ -23,7 +23,7 @@ interface WindowConfig {
 }
 
 const WINDOWS: WindowConfig[] = [
-  { id: "about", title: "About Me", icon: <User className="w-4 h-4" />, content: <AboutSection />, position: { x: 120, y: 60 }, size: { width: 500, height: 420 } },
+  { id: "about", title: "About Me", icon: <Sparkles className="w-4 h-4" />, content: <AboutSection />, position: { x: 120, y: 60 }, size: { width: 500, height: 420 } },
   { id: "projects", title: "Projects", icon: <FolderOpen className="w-4 h-4" />, content: <ProjectsSection />, position: { x: 180, y: 80 }, size: { width: 480, height: 400 } },
   { id: "hobbies", title: "Hobbies", icon: <Heart className="w-4 h-4" />, content: <HobbiesSection />, position: { x: 240, y: 100 }, size: { width: 420, height: 380 } },
   { id: "experience", title: "Experience", icon: <Briefcase className="w-4 h-4" />, content: <ExperienceSection />, position: { x: 160, y: 70 }, size: { width: 520, height: 380 } },
@@ -33,7 +33,7 @@ const WINDOWS: WindowConfig[] = [
 ];
 
 const DESKTOP_ICONS = [
-  { id: "about" as WindowId, icon: <User className="w-10 h-10" />, label: "About Me" },
+  { id: "about" as WindowId, icon: <Sparkles className="w-10 h-10" />, label: "About Me" },
   { id: "projects" as WindowId, icon: <FolderOpen className="w-10 h-10" />, label: "Projects" },
   { id: "hobbies" as WindowId, icon: <Heart className="w-10 h-10" />, label: "Hobbies" },
   { id: "experience" as WindowId, icon: <Briefcase className="w-10 h-10" />, label: "Experience" },

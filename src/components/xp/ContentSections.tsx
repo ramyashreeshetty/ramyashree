@@ -102,16 +102,52 @@ export const ExperienceSection = () => (
 
 export const VisionSection = () => (
   <div className="space-y-4">
-    <p className="text-foreground leading-relaxed">
-      I believe in <span className="text-primary font-semibold">continuous learning</span> and building technology that makes a positive impact.
-    </p>
-    <div className="grid gap-3">
-      {["Master cloud-native architectures", "Contribute to open source", "Mentor aspiring engineers", "Build accessible tech"].map((goal, i) => (
-        <div key={i} className="flex items-center gap-2 p-2 bg-accent/10 rounded">
-          <span className="text-accent">✓</span>
-          <span className="text-foreground">{goal}</span>
-        </div>
-      ))}
+    <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
+      ✨ 2026 Vision Board
+    </h2>
+    
+    <div className="grid grid-cols-3 gap-3">
+      {/* Vision cards with cute aesthetic */}
+      <div className="p-3 bg-gradient-to-br from-pink-100 to-rose-200 rounded-xl text-center shadow-sm border border-pink-200">
+        <div className="text-2xl mb-1">💼</div>
+        <div className="font-semibold text-rose-700 text-sm">Dream Job</div>
+        <div className="text-xs text-rose-600">Staff Engineer</div>
+      </div>
+      
+      <div className="p-3 bg-gradient-to-br from-blue-100 to-sky-200 rounded-xl text-center shadow-sm border border-blue-200">
+        <div className="text-2xl mb-1">🌏</div>
+        <div className="font-semibold text-sky-700 text-sm">Travel</div>
+        <div className="text-xs text-sky-600">Visit Japan</div>
+      </div>
+      
+      <div className="p-3 bg-gradient-to-br from-green-100 to-emerald-200 rounded-xl text-center shadow-sm border border-green-200">
+        <div className="text-2xl mb-1">📚</div>
+        <div className="font-semibold text-emerald-700 text-sm">Learn</div>
+        <div className="text-xs text-emerald-600">Fluent in Japanese</div>
+      </div>
+      
+      <div className="p-3 bg-gradient-to-br from-purple-100 to-violet-200 rounded-xl text-center shadow-sm border border-purple-200">
+        <div className="text-2xl mb-1">🏠</div>
+        <div className="font-semibold text-violet-700 text-sm">Lifestyle</div>
+        <div className="text-xs text-violet-600">Cozy home setup</div>
+      </div>
+      
+      <div className="p-3 bg-gradient-to-br from-amber-100 to-yellow-200 rounded-xl text-center shadow-sm border border-yellow-200">
+        <div className="text-2xl mb-1">💪</div>
+        <div className="font-semibold text-amber-700 text-sm">Health</div>
+        <div className="text-xs text-amber-600">Consistent routine</div>
+      </div>
+      
+      <div className="p-3 bg-gradient-to-br from-teal-100 to-cyan-200 rounded-xl text-center shadow-sm border border-teal-200">
+        <div className="text-2xl mb-1">🌟</div>
+        <div className="font-semibold text-teal-700 text-sm">Open Source</div>
+        <div className="text-xs text-teal-600">Major contribution</div>
+      </div>
+    </div>
+    
+    {/* Affirmation */}
+    <div className="p-3 bg-gradient-to-r from-pink-50 via-purple-50 to-blue-50 rounded-lg text-center border border-purple-100">
+      <p className="text-sm italic text-purple-600">"Building the future, one commit at a time 🚀"</p>
     </div>
   </div>
 );
