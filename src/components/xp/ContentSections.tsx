@@ -85,15 +85,35 @@ export const HobbiesSection = () => (
 export const ExperienceSection = () => (
   <div className="space-y-4">
     {[
-      { year: "2022-Present", role: "Senior Data Engineer", company: "Tech Corp", desc: "Leading data infrastructure initiatives" },
-      { year: "2020-2022", role: "Data Engineer", company: "StartupXYZ", desc: "Built ETL pipelines from scratch" },
-      { year: "2018-2020", role: "Junior Developer", company: "Agency Inc", desc: "Full-stack web development" },
+      { 
+        year: "Mar 2025 - Present", 
+        role: "Senior Associate - Data Engineer", 
+        company: "Radix", 
+        location: "Mumbai, India • Hybrid",
+        skills: "Tableau, Google BigQuery, +9 skills"
+      },
+      { 
+        year: "Feb 2023 - Feb 2025", 
+        role: "Data Engineer", 
+        company: "Blazeclan Technologies", 
+        location: "Pune, India • Hybrid",
+        skills: "Python, Matillion ETL, +15 skills"
+      },
+      { 
+        year: "Aug 2022 - Jan 2023", 
+        role: "Intern", 
+        company: "Blazeclan Technologies", 
+        location: "Remote",
+        skills: ""
+      },
     ].map((exp, i) => (
       <div key={i} className="flex gap-4 p-3 bg-muted rounded-lg">
-        <div className="text-sm text-primary font-mono whitespace-nowrap">{exp.year}</div>
+        <div className="text-xs text-primary font-mono whitespace-nowrap min-w-[100px]">{exp.year}</div>
         <div>
           <h3 className="font-semibold text-foreground">{exp.role}</h3>
-          <p className="text-sm text-muted-foreground">{exp.company} • {exp.desc}</p>
+          <p className="text-sm text-muted-foreground">{exp.company}</p>
+          <p className="text-xs text-muted-foreground">{exp.location}</p>
+          {exp.skills && <p className="text-xs text-primary/70 mt-1">{exp.skills}</p>}
         </div>
       </div>
     ))}
@@ -111,7 +131,7 @@ export const VisionSection = () => (
       <div className="p-3 bg-gradient-to-br from-pink-100 to-rose-200 rounded-xl text-center shadow-sm border border-pink-200">
         <div className="text-2xl mb-1">💼</div>
         <div className="font-semibold text-rose-700 text-sm">Dream Job</div>
-        <div className="text-xs text-rose-600">Staff Engineer</div>
+        <div className="text-xs text-rose-600">Independent</div>
       </div>
       
       <div className="p-3 bg-gradient-to-br from-blue-100 to-sky-200 rounded-xl text-center shadow-sm border border-blue-200">
