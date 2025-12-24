@@ -86,7 +86,7 @@ export const XPWindow = ({
   return (
     <div
       ref={windowRef}
-      className="xp-window fixed bg-card animate-scale-in"
+      className="xp-window fixed bg-card xp-window-enter"
       style={{
         left: position.x,
         top: position.y,
