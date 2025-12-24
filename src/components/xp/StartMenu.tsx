@@ -2,17 +2,23 @@ import { User, FolderOpen, Briefcase, Heart, Telescope, Mail, Github, Linkedin, 
 
 interface StartMenuProps {
   onClose: () => void;
+  onOpenWindow?: (id: string) => void;
 }
 
-export const StartMenu = ({ onClose }: StartMenuProps) => {
+export const StartMenu = ({ onClose, onOpenWindow }: StartMenuProps) => {
   const menuItems = [
-    { icon: <User className="w-8 h-8" />, label: "About Me", description: "Learn about Ramyashree" },
-    { icon: <FolderOpen className="w-8 h-8" />, label: "Projects", description: "View my work" },
-    { icon: <Heart className="w-8 h-8" />, label: "Hobbies", description: "What I love" },
-    { icon: <Briefcase className="w-8 h-8" />, label: "Experience", description: "My journey" },
-    { icon: <Telescope className="w-8 h-8" />, label: "Vision", description: "Goals & dreams" },
-    { icon: <Mail className="w-8 h-8" />, label: "Contact", description: "Get in touch" },
+    { id: "about", icon: <User className="w-8 h-8" />, label: "About Me", description: "Learn about Ramyashree" },
+    { id: "projects", icon: <FolderOpen className="w-8 h-8" />, label: "Projects", description: "View my work" },
+    { id: "hobbies", icon: <Heart className="w-8 h-8" />, label: "Hobbies", description: "What I love" },
+    { id: "experience", icon: <Briefcase className="w-8 h-8" />, label: "Experience", description: "My journey" },
+    { id: "vision", icon: <Telescope className="w-8 h-8" />, label: "Vision", description: "Goals & dreams" },
+    { id: "contact", icon: <Mail className="w-8 h-8" />, label: "Contact", description: "Get in touch" },
   ];
+
+  const handleItemClick = (id: string) => {
+    onOpenWindow?.(id);
+    onClose();
+  };
 
   return (
     <div className="fixed bottom-12 left-0 z-50 animate-fade-in" onClick={(e) => e.stopPropagation()}>
@@ -43,10 +49,10 @@ export const StartMenu = ({ onClose }: StartMenuProps) => {
         <div className="flex">
           {/* Left Panel - Programs */}
           <div className="w-56 bg-white p-2">
-            {menuItems.map((item, index) => (
+            {menuItems.map((item) => (
               <button
-                key={index}
-                onClick={onClose}
+                key={item.id}
+                onClick={() => handleItemClick(item.id)}
                 className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 transition-colors text-left group"
               >
                 <div className="text-blue-500 group-hover:text-blue-600 transition-colors">{item.icon}</div>

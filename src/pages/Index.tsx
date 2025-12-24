@@ -45,18 +45,19 @@ const DESKTOP_ICONS = [
 const Index = () => {
   const [showWelcome, setShowWelcome] = useState(true);
   const [openWindows, setOpenWindows] = useState<WindowId[]>(["garden"]);
+  const [minimizedWindows, setMinimizedWindows] = useState<WindowId[]>([]);
   const [activeWindow, setActiveWindow] = useState<WindowId | null>("garden");
   const [windowOrder, setWindowOrder] = useState<WindowId[]>(["garden"]);
 
   const handleLogin = () => {
     setShowWelcome(false);
     playSound("success");
-    // Music will auto-play on login
   };
 
   const handleLogout = () => {
     setShowWelcome(true);
     setOpenWindows(["garden"]);
+    setMinimizedWindows([]);
     setActiveWindow("garden");
     setWindowOrder(["garden"]);
   };
@@ -66,12 +67,15 @@ const Index = () => {
       setOpenWindows([...openWindows, id]);
       playSound("popup");
     }
+    // Restore if minimized
+    setMinimizedWindows(minimizedWindows.filter(w => w !== id));
     setActiveWindow(id);
     setWindowOrder([...windowOrder.filter(w => w !== id), id]);
   };
 
   const closeWindow = (id: WindowId) => {
     setOpenWindows(openWindows.filter(w => w !== id));
+    setMinimizedWindows(minimizedWindows.filter(w => w !== id));
     setWindowOrder(windowOrder.filter(w => w !== id));
     playSound("close");
     if (activeWindow === id) {
@@ -79,7 +83,14 @@ const Index = () => {
     }
   };
 
+  const minimizeWindow = (id: WindowId) => {
+    setMinimizedWindows([...minimizedWindows, id]);
+    setActiveWindow(windowOrder.filter(w => w !== id).pop() || null);
+  };
+
   const focusWindow = (id: WindowId) => {
+    // Restore if minimized
+    setMinimizedWindows(minimizedWindows.filter(w => w !== id));
     setActiveWindow(id);
     setWindowOrder([...windowOrder.filter(w => w !== id), id]);
   };
@@ -116,9 +127,9 @@ const Index = () => {
           key={window.id}
           title={window.title}
           icon={window.icon}
-          isOpen={openWindows.includes(window.id)}
+          isOpen={openWindows.includes(window.id) && !minimizedWindows.includes(window.id)}
           onClose={() => closeWindow(window.id)}
-          onMinimize={() => closeWindow(window.id)}
+          onMinimize={() => minimizeWindow(window.id)}
           onFocus={() => focusWindow(window.id)}
           initialPosition={window.position}
           initialSize={window.size}
@@ -143,6 +154,7 @@ const Index = () => {
         activeWindow={activeWindow}
         onWindowClick={focusWindow}
         onLogout={handleLogout}
+        onOpenWindow={openWindow}
       />
     </div>
   );
