@@ -252,8 +252,8 @@
 
   /* Desktop Icon */
   .desktop-icon {
-    @apply flex flex-col items-center gap-1 p-2 rounded-lg cursor-pointer transition-all;
-    width: 80px;
+    @apply flex flex-col items-center gap-0.5 p-1.5 rounded-lg cursor-pointer transition-all;
+    width: 70px;
   }
 
   .desktop-icon:hover {
