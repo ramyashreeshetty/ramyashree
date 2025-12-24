@@ -15,8 +15,8 @@ export const AboutSection = () => (
     </div>
     
     <p className="text-foreground leading-relaxed">
-      I'm a <span className="text-primary font-semibold">Data Engineer</span> who loves turning chaotic data into meaningful insights. 
-      My ADHD brain means I'm constantly exploring new technologies, languages, and ideas!
+      I'm a <span className="text-pink-500 font-semibold">Data Engineer</span> who loves turning chaotic data into meaningful insights. 
+      My curious mind keeps me exploring new technologies, languages, and ideas — there's always something exciting to learn! ✨
     </p>
     
     <p className="text-foreground leading-relaxed">

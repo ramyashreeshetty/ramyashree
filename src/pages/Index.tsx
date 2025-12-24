@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { User, FolderOpen, Heart, Briefcase, Telescope, Mail, Flower2 } from "lucide-react";
 import { DesktopIcon } from "@/components/xp/DesktopIcon";
 import { XPWindow } from "@/components/xp/XPWindow";
 import { Taskbar } from "@/components/xp/Taskbar";
 import { MusicPlayer } from "@/components/xp/MusicPlayer";
-import { PixelMascot } from "@/components/xp/PixelMascot";
+import { CatMascot } from "@/components/xp/CatMascot";
 import { FlowerGarden } from "@/components/xp/FlowerGarden";
+import { WelcomeScreen } from "@/components/xp/WelcomeScreen";
 import { AboutSection, ProjectsSection, HobbiesSection, ExperienceSection, VisionSection, ContactSection } from "@/components/xp/ContentSections";
+import { playSound } from "@/components/xp/SoundManager";
+import xpWallpaper from "@/assets/xp-wallpaper.jpg";
 
 type WindowId = "about" | "projects" | "hobbies" | "experience" | "vision" | "contact" | "garden";
 
@@ -26,7 +29,7 @@ const WINDOWS: WindowConfig[] = [
   { id: "experience", title: "Experience", icon: <Briefcase className="w-4 h-4" />, content: <ExperienceSection />, position: { x: 160, y: 70 }, size: { width: 520, height: 380 } },
   { id: "vision", title: "Vision", icon: <Telescope className="w-4 h-4" />, content: <VisionSection />, position: { x: 200, y: 90 }, size: { width: 440, height: 350 } },
   { id: "contact", title: "Contact", icon: <Mail className="w-4 h-4" />, content: <ContactSection />, position: { x: 280, y: 110 }, size: { width: 400, height: 420 } },
-  { id: "garden", title: "Flower Garden", icon: <Flower2 className="w-4 h-4" />, content: <FlowerGarden />, position: { x: 100, y: 40 }, size: { width: 600, height: 500 } },
+  { id: "garden", title: "Flower Garden", icon: <Flower2 className="w-4 h-4" />, content: <FlowerGarden />, position: { x: 150, y: 30 }, size: { width: 550, height: 480 } },
 ];
 
 const DESKTOP_ICONS = [
@@ -40,13 +43,20 @@ const DESKTOP_ICONS = [
 ];
 
 const Index = () => {
-  const [openWindows, setOpenWindows] = useState<WindowId[]>(["about"]);
-  const [activeWindow, setActiveWindow] = useState<WindowId | null>("about");
-  const [windowOrder, setWindowOrder] = useState<WindowId[]>(["about"]);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [openWindows, setOpenWindows] = useState<WindowId[]>(["garden"]);
+  const [activeWindow, setActiveWindow] = useState<WindowId | null>("garden");
+  const [windowOrder, setWindowOrder] = useState<WindowId[]>(["garden"]);
+
+  const handleLogin = () => {
+    setShowWelcome(false);
+    playSound("success");
+  };
 
   const openWindow = (id: WindowId) => {
     if (!openWindows.includes(id)) {
       setOpenWindows([...openWindows, id]);
+      playSound("popup");
     }
     setActiveWindow(id);
     setWindowOrder([...windowOrder.filter(w => w !== id), id]);
@@ -55,6 +65,7 @@ const Index = () => {
   const closeWindow = (id: WindowId) => {
     setOpenWindows(openWindows.filter(w => w !== id));
     setWindowOrder(windowOrder.filter(w => w !== id));
+    playSound("close");
     if (activeWindow === id) {
       setActiveWindow(windowOrder[windowOrder.length - 2] || null);
     }
@@ -65,11 +76,17 @@ const Index = () => {
     setWindowOrder([...windowOrder.filter(w => w !== id), id]);
   };
 
+  if (showWelcome) {
+    return <WelcomeScreen onLogin={handleLogin} />;
+  }
+
   return (
     <div 
       className="min-h-screen pb-12 overflow-hidden"
       style={{
-        background: "linear-gradient(180deg, hsl(200 70% 60%) 0%, hsl(200 65% 50%) 50%, hsl(120 40% 45%) 100%)",
+        backgroundImage: `url(${xpWallpaper})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       {/* Desktop Icons */}
@@ -106,8 +123,8 @@ const Index = () => {
       {/* Music Player */}
       <MusicPlayer />
 
-      {/* Pixel Mascot */}
-      <PixelMascot />
+      {/* Cat Mascot */}
+      <CatMascot />
 
       {/* Taskbar */}
       <Taskbar

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Flower, Flower2, Trash2 } from "lucide-react";
+import { Flower2, Trash2, Sparkles } from "lucide-react";
+import { playSound } from "./SoundManager";
 
-interface Flower {
+interface FlowerData {
   id: string;
   x: number;
   y: number;
@@ -18,6 +19,21 @@ const FLOWER_COLORS = [
   "#AA96DA", // Lavender
   "#FF6B6B", // Red
   "#74B9FF", // Blue
+];
+
+const LIFE_QUOTES = [
+  "Bloom where you are planted 🌸",
+  "Every flower is a soul blossoming in nature 🌷",
+  "Like flowers, we can choose to bloom 🌻",
+  "Be like a flower, survive the rain but use it to grow 🌺",
+  "Where flowers bloom, so does hope 💐",
+  "A flower does not think of competing with the flower next to it 🌼",
+  "Let your dreams blossom 🌹",
+  "Happiness held is the seed; happiness shared is the flower 🌸",
+  "Every flower must grow through dirt 🌱",
+  "You belong among the wildflowers 🌾",
+  "In a field of roses, be a wildflower 🌿",
+  "Plant seeds of happiness, hope, success, and love 💕",
 ];
 
 const FlowerSVG = ({ color, type }: { color: string; type: string }) => {
@@ -66,9 +82,10 @@ const FlowerSVG = ({ color, type }: { color: string; type: string }) => {
 };
 
 export const FlowerGarden = () => {
-  const [flowers, setFlowers] = useState<Flower[]>([]);
+  const [flowers, setFlowers] = useState<FlowerData[]>([]);
   const [selectedColor, setSelectedColor] = useState(FLOWER_COLORS[0]);
   const [selectedType, setSelectedType] = useState<"tulip" | "rose" | "daisy">("tulip");
+  const [currentQuote, setCurrentQuote] = useState<string | null>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem("flower-garden");
@@ -86,7 +103,7 @@ export const FlowerGarden = () => {
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
 
-    const newFlower: Flower = {
+    const newFlower: FlowerData = {
       id: Date.now().toString(),
       x,
       y,
@@ -96,25 +113,42 @@ export const FlowerGarden = () => {
     };
 
     setFlowers([...flowers, newFlower]);
+    playSound("success");
+    
+    // Show a random quote
+    const quote = LIFE_QUOTES[Math.floor(Math.random() * LIFE_QUOTES.length)];
+    setCurrentQuote(quote);
+    setTimeout(() => setCurrentQuote(null), 4000);
   };
 
   const clearGarden = () => {
     setFlowers([]);
+    playSound("click");
   };
 
   return (
     <div className="h-full flex flex-col">
+      {/* Quote Banner */}
+      {currentQuote && (
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 animate-fade-in">
+          <div className="bg-card/95 backdrop-blur-sm border-2 border-pink-200 rounded-full px-4 py-2 shadow-lg flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-pink-400" />
+            <span className="text-sm font-medium text-foreground">{currentQuote}</span>
+          </div>
+        </div>
+      )}
+
       {/* Controls */}
-      <div className="flex flex-wrap items-center gap-3 mb-4 p-3 bg-muted rounded-lg">
+      <div className="flex flex-wrap items-center gap-3 mb-4 p-3 bg-pink-50 dark:bg-pink-950/20 rounded-xl border border-pink-200">
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">Color:</span>
           <div className="flex gap-1">
             {FLOWER_COLORS.map((color) => (
               <button
                 key={color}
-                onClick={() => setSelectedColor(color)}
+                onClick={() => { setSelectedColor(color); playSound("click"); }}
                 className={`w-6 h-6 rounded-full transition-transform ${
-                  selectedColor === color ? "ring-2 ring-primary ring-offset-2 scale-110" : ""
+                  selectedColor === color ? "ring-2 ring-pink-400 ring-offset-2 scale-110" : ""
                 }`}
                 style={{ backgroundColor: color }}
               />
@@ -128,11 +162,11 @@ export const FlowerGarden = () => {
             {(["tulip", "rose", "daisy"] as const).map((type) => (
               <button
                 key={type}
-                onClick={() => setSelectedType(type)}
-                className={`px-3 py-1 text-sm rounded capitalize transition-all ${
+                onClick={() => { setSelectedType(type); playSound("click"); }}
+                className={`px-3 py-1 text-sm rounded-full capitalize transition-all ${
                   selectedType === type
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-secondary hover:bg-secondary/80"
+                    ? "bg-pink-400 text-white"
+                    : "bg-secondary hover:bg-pink-100"
                 }`}
               >
                 {type}
@@ -143,7 +177,7 @@ export const FlowerGarden = () => {
 
         <button
           onClick={clearGarden}
-          className="ml-auto flex items-center gap-1 px-3 py-1 text-sm bg-destructive/10 text-destructive rounded hover:bg-destructive/20"
+          className="ml-auto flex items-center gap-1 px-3 py-1 text-sm bg-pink-100 text-pink-600 rounded-full hover:bg-pink-200"
         >
           <Trash2 className="w-4 h-4" />
           Clear
@@ -153,10 +187,10 @@ export const FlowerGarden = () => {
       {/* Garden Area */}
       <div
         onClick={handleGardenClick}
-        className="flex-1 relative rounded-lg cursor-crosshair overflow-hidden"
+        className="flex-1 relative rounded-xl cursor-crosshair overflow-hidden"
         style={{
-          background: "linear-gradient(180deg, #87CEEB 0%, #87CEEB 40%, #90EE90 40%, #228B22 100%)",
-          minHeight: 300,
+          background: "linear-gradient(180deg, #87CEEB 0%, #B0E0E6 40%, #98FB98 40%, #228B22 100%)",
+          minHeight: 280,
         }}
       >
         {/* Sun */}
@@ -172,9 +206,9 @@ export const FlowerGarden = () => {
         {/* Instruction */}
         {flowers.length === 0 && (
           <div className="absolute inset-0 flex items-center justify-center text-foreground/50 pointer-events-none">
-            <div className="bg-card/80 px-4 py-2 rounded-lg flex items-center gap-2">
-              <Flower2 className="w-5 h-5" />
-              Click anywhere to plant a flower!
+            <div className="bg-card/90 px-4 py-3 rounded-xl flex items-center gap-2 shadow-lg">
+              <Flower2 className="w-5 h-5 text-pink-400" />
+              <span>Click anywhere to plant a flower!</span>
             </div>
           </div>
         )}
