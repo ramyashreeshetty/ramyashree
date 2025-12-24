@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { RotateCcw } from "lucide-react";
 
 interface WelcomeScreenProps {
   onLogin: () => void;
@@ -8,7 +9,6 @@ export const WelcomeScreen = ({ onLogin }: WelcomeScreenProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = () => {
-    // Play click sound
     const audio = new Audio("https://www.soundjay.com/buttons/sounds/button-09.mp3");
     audio.volume = 0.3;
     audio.play().catch(() => {});
@@ -21,60 +21,74 @@ export const WelcomeScreen = ({ onLogin }: WelcomeScreenProps) => {
 
   return (
     <div 
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center"
+      className="fixed inset-0 z-[100] flex"
       style={{
-        background: "linear-gradient(180deg, hsl(220 60% 25%) 0%, hsl(210 70% 45%) 30%, hsl(200 70% 55%) 100%)",
+        background: "linear-gradient(180deg, hsl(210 65% 50%) 0%, hsl(210 60% 55%) 50%, hsl(210 55% 60%) 100%)",
       }}
     >
       {/* Top gradient bar */}
-      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background/30 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[hsl(210_70%_35%)] to-transparent" />
 
-      {/* Main Content */}
-      <div className="flex flex-col items-center gap-8 animate-fade-in">
+      {/* Left side - Logo and instructions */}
+      <div className="flex-1 flex flex-col items-center justify-center">
         {/* Windows-style Logo */}
         <div className="flex flex-col items-center gap-4 mb-8">
-          <div className="text-6xl">🌸</div>
+          {/* XP-style flag logo */}
+          <svg width="80" height="80" viewBox="0 0 80 80" className="drop-shadow-lg">
+            <path d="M10 20 Q20 15 35 18 Q40 35 38 45 Q20 48 10 42 Z" fill="#FF5722" />
+            <path d="M42 18 Q55 12 70 18 Q72 35 70 45 Q55 42 42 45 Z" fill="#4CAF50" />
+            <path d="M10 48 Q20 52 38 50 Q40 60 38 70 Q20 75 10 68 Z" fill="#2196F3" />
+            <path d="M42 50 Q55 48 70 50 Q72 65 70 72 Q55 78 42 70 Z" fill="#FFC107" />
+          </svg>
           <div className="text-center">
-            <h1 className="font-display text-5xl font-bold text-primary-foreground tracking-tight">
-              Ramya<span className="text-pink-300 text-3xl align-super">✨</span>
+            <h1 className="text-5xl font-bold text-white tracking-tight" style={{ fontFamily: "'Quicksand', sans-serif" }}>
+              Ramyashree<span className="text-2xl align-super opacity-80">XP</span>
             </h1>
-            <p className="text-primary-foreground/80 text-lg font-medium mt-1">Data Engineer</p>
+            <p className="text-white/80 text-lg font-medium mt-1">Data Engineer</p>
           </div>
         </div>
 
         {/* Instructions */}
-        <p className="text-primary-foreground/70 text-sm mb-4">
-          To begin, click on Ramya to enter
+        <p className="text-white/70 text-sm mb-6">
+          To begin, click on Ramyashree to log in
         </p>
+      </div>
 
-        {/* User Card */}
+      {/* Right side - User profile card */}
+      <div className="flex-1 flex items-center justify-start pl-8">
         <button
           onClick={handleClick}
           disabled={isLoading}
-          className="group flex items-center gap-4 bg-card/10 backdrop-blur-sm border-2 border-primary-foreground/20 rounded-xl p-4 pr-8 hover:bg-card/20 hover:border-primary-foreground/40 transition-all hover:scale-105 disabled:opacity-70"
+          className="group flex items-center gap-4 hover:scale-105 transition-transform disabled:opacity-70"
         >
-          <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center text-3xl shadow-lg group-hover:shadow-xl transition-shadow">
-            👩‍💻
+          {/* Profile picture with border */}
+          <div className="w-20 h-20 rounded-md bg-white p-1 shadow-lg">
+            <div className="w-full h-full rounded-sm bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 flex items-center justify-center">
+              <span className="text-4xl">👩‍💻</span>
+            </div>
           </div>
           <div className="text-left">
-            <div className="text-xl font-bold text-primary-foreground">Ramya</div>
-            <div className="text-sm text-primary-foreground/70">Data Engineer</div>
+            <div className="text-xl font-bold text-white">Ramyashree</div>
+            <div className="text-sm text-white/70">Data Engineer</div>
+            {isLoading && (
+              <div className="mt-2 w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            )}
           </div>
-          {isLoading && (
-            <div className="ml-4 w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-          )}
         </button>
       </div>
 
-      {/* Bottom bar with message */}
-      <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-gradient-to-t from-background/20 to-transparent">
-        <div className="flex items-center gap-2 text-primary-foreground/60 text-sm">
-          <span>🌸</span>
-          <span>Welcome to my corner of the internet!</span>
-        </div>
-        <div className="text-primary-foreground/50 text-xs text-right">
+      {/* Bottom bar */}
+      <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-gradient-to-t from-[hsl(210_70%_35%)] to-transparent">
+        {/* Restart button */}
+        <button className="flex items-center gap-2 text-white/80 hover:text-white text-sm transition-colors">
+          <RotateCcw className="w-4 h-4" />
+          <span>Restart Ramyashree XP</span>
+        </button>
+        
+        {/* Right side text */}
+        <div className="text-white/60 text-xs text-right">
           <div>After you log on, the system is yours to explore.</div>
-          <div>Every detail has been designed with love. 💕</div>
+          <div>Every detail has been designed with a purpose.</div>
         </div>
       </div>
     </div>

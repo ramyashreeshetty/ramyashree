@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { User, FolderOpen, Heart, Briefcase, Telescope, Mail, Flower2 } from "lucide-react";
 import { DesktopIcon } from "@/components/xp/DesktopIcon";
 import { XPWindow } from "@/components/xp/XPWindow";
@@ -53,6 +53,13 @@ const Index = () => {
     playSound("success");
   };
 
+  const handleLogout = () => {
+    setShowWelcome(true);
+    setOpenWindows(["garden"]);
+    setActiveWindow("garden");
+    setWindowOrder(["garden"]);
+  };
+
   const openWindow = (id: WindowId) => {
     if (!openWindows.includes(id)) {
       setOpenWindows([...openWindows, id]);
@@ -89,8 +96,8 @@ const Index = () => {
         backgroundPosition: "center",
       }}
     >
-      {/* Desktop Icons */}
-      <div className="p-4 grid grid-cols-1 gap-2 w-fit">
+      {/* Desktop Icons - properly spaced */}
+      <div className="p-4 flex flex-col gap-3 w-fit">
         {DESKTOP_ICONS.map((icon) => (
           <DesktopIcon
             key={icon.id}
@@ -123,7 +130,7 @@ const Index = () => {
       {/* Music Player */}
       <MusicPlayer />
 
-      {/* Cat Mascot */}
+      {/* Cat Mascot - positioned on right side to not interfere with icons */}
       <CatMascot />
 
       {/* Taskbar */}
@@ -134,6 +141,7 @@ const Index = () => {
         })}
         activeWindow={activeWindow}
         onWindowClick={focusWindow}
+        onLogout={handleLogout}
       />
     </div>
   );
