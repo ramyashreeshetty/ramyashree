@@ -99,10 +99,10 @@ export const DesktopIcon = ({ label, onClick, selected }: DesktopIconProps) => {
       onDoubleClick={handleClick}
       className={`desktop-icon group ${selected ? "selected" : ""}`}
     >
-      <div className="w-12 h-12 flex items-center justify-center">
+      <div className="w-10 h-10 flex items-center justify-center">
         <PixelIcon type={label} />
       </div>
-      <span className="text-[11px] text-center font-semibold leading-tight px-1 text-slate-800 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
+      <span className="text-[10px] text-center font-bold leading-tight px-0.5 text-slate-900 drop-shadow-[0_1px_2px_rgba(255,255,255,1)] max-w-[70px]">
         {label}
       </span>
     </button>
