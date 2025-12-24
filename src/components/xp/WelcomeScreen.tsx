@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { RotateCcw } from "lucide-react";
+import profileAvatar from "@/assets/profile-avatar.png";
 
 interface WelcomeScreenProps {
   onLogin: () => void;
@@ -62,10 +63,12 @@ export const WelcomeScreen = ({ onLogin }: WelcomeScreenProps) => {
           className="group flex items-center gap-4 hover:scale-105 transition-transform disabled:opacity-70"
         >
           {/* Profile picture with border */}
-          <div className="w-20 h-20 rounded-md bg-white p-1 shadow-lg">
-            <div className="w-full h-full rounded-sm bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 flex items-center justify-center">
-              <span className="text-4xl">👩‍💻</span>
-            </div>
+          <div className="w-20 h-20 rounded-md bg-white p-1 shadow-lg overflow-hidden">
+            <img 
+              src={profileAvatar} 
+              alt="Ramyashree" 
+              className="w-full h-full rounded-sm object-cover"
+            />
           </div>
           <div className="text-left">
             <div className="text-xl font-bold text-white">Ramyashree</div>

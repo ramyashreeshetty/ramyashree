@@ -1,11 +1,11 @@
 import { Github, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
-import avatar from "@/assets/avatar.png";
+import profileAvatar from "@/assets/profile-avatar.png";
 
 export const AboutSection = () => (
   <div className="space-y-4">
     <div className="flex items-start gap-4">
       <img 
-        src={avatar} 
+        src={profileAvatar} 
         alt="Ramyashree" 
         className="w-20 h-20 rounded-full object-cover border-2 border-primary/30 shrink-0"
       />
