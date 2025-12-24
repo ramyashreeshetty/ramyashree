@@ -12,13 +12,14 @@ const PixelIcon = ({ type }: { type: string }) => {
   switch (type) {
     case "About Me":
       return (
-        <svg width="40" height="40" viewBox="0 0 32 32" className="drop-shadow">
-          <rect x="10" y="4" width="12" height="12" rx="6" fill="#89CFF0" />
-          <rect x="12" y="8" width="3" height="2" fill="#2D2D2D" />
-          <rect x="17" y="8" width="3" height="2" fill="#2D2D2D" />
-          <rect x="14" y="12" width="4" height="1" fill="#2D2D2D" />
-          <rect x="8" y="16" width="16" height="12" rx="2" fill="#89CFF0" />
-          <rect x="12" y="20" width="8" height="4" fill="#B8E0F0" />
+        <svg width="40" height="40" viewBox="0 0 32 32" className="drop-shadow-lg">
+          {/* Cute star/sparkle person icon */}
+          <circle cx="16" cy="10" r="7" fill="#FFB5E8" />
+          <circle cx="13" cy="9" r="1.5" fill="#4A4A4A" />
+          <circle cx="19" cy="9" r="1.5" fill="#4A4A4A" />
+          <path d="M13 13 Q16 15 19 13" stroke="#4A4A4A" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+          <rect x="10" y="17" width="12" height="10" rx="3" fill="#B5DEFF" />
+          <circle cx="16" cy="21" r="2" fill="#FFD700" />
         </svg>
       );
     case "Projects":
@@ -101,7 +102,7 @@ export const DesktopIcon = ({ label, onClick, selected }: DesktopIconProps) => {
       <div className="w-12 h-12 flex items-center justify-center">
         <PixelIcon type={label} />
       </div>
-      <span className="text-[11px] text-center text-white font-medium drop-shadow-md leading-tight px-1">
+      <span className="text-[11px] text-center font-semibold leading-tight px-1 text-slate-800 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
         {label}
       </span>
     </button>

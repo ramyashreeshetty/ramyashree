@@ -1,13 +1,16 @@
 import { Github, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
+import avatar from "@/assets/avatar.png";
 
 export const AboutSection = () => (
   <div className="space-y-4">
     <div className="flex items-start gap-4">
-      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center text-3xl shrink-0">
-        👩‍💻
-      </div>
+      <img 
+        src={avatar} 
+        alt="Ramyashree" 
+        className="w-20 h-20 rounded-full object-cover border-2 border-primary/30 shrink-0"
+      />
       <div>
-        <h2 className="text-2xl font-bold text-foreground">Hey, I'm Ramya! 👋</h2>
+        <h2 className="text-2xl font-bold text-foreground">Hey, I'm Ramya!</h2>
         <p className="text-muted-foreground flex items-center gap-1">
           <MapPin className="w-4 h-4" /> Data Engineer & Curious Explorer
         </p>
@@ -15,8 +18,8 @@ export const AboutSection = () => (
     </div>
     
     <p className="text-foreground leading-relaxed">
-      I'm a <span className="text-pink-500 font-semibold">Data Engineer</span> who loves turning chaotic data into meaningful insights. 
-      My curious mind keeps me exploring new technologies, languages, and ideas — there's always something exciting to learn! ✨
+      I'm a <span className="text-primary font-semibold">Data Engineer</span> who loves turning chaotic data into meaningful insights. 
+      My curious mind keeps me exploring new technologies, languages, and ideas — there's always something exciting to learn!
     </p>
     
     <p className="text-foreground leading-relaxed">
@@ -25,16 +28,16 @@ export const AboutSection = () => (
       and having fun along the way! <Sparkles className="inline w-4 h-4 text-yellow-500" />
     </p>
 
-    <div className="flex gap-3 pt-2">
-      <a href="https://github.com/ramya" target="_blank" rel="noopener noreferrer" 
+    <div className="flex gap-3 pt-2 pb-4">
+      <a href="https://github.com/ramyashreeshetty" target="_blank" rel="noopener noreferrer" 
         className="xp-button flex items-center gap-2">
         <Github className="w-4 h-4" /> GitHub
       </a>
-      <a href="https://linkedin.com/in/ramya" target="_blank" rel="noopener noreferrer"
+      <a href="https://www.linkedin.com/in/ramyashree-shetty/" target="_blank" rel="noopener noreferrer"
         className="xp-button flex items-center gap-2">
         <Linkedin className="w-4 h-4" /> LinkedIn
       </a>
-      <a href="mailto:ramya@example.com" className="xp-button flex items-center gap-2">
+      <a href="mailto:ramyashetty18042000@gmail.com" className="xp-button flex items-center gap-2">
         <Mail className="w-4 h-4" /> Email
       </a>
     </div>
@@ -120,7 +123,7 @@ export const ContactSection = () => (
       <input type="text" placeholder="Your Name" className="w-full p-2 border border-border rounded bg-background text-foreground" />
       <input type="email" placeholder="Your Email" className="w-full p-2 border border-border rounded bg-background text-foreground" />
       <textarea placeholder="Your Message" rows={3} className="w-full p-2 border border-border rounded bg-background text-foreground" />
-      <button type="submit" className="xp-button w-full">Send Message 📧</button>
+      <button type="submit" className="xp-button w-full">Send Message</button>
     </form>
   </div>
 );
