@@ -90,7 +90,7 @@ const Index = () => {
 
   return (
     <div 
-      className="min-h-screen pb-12 overflow-hidden"
+      className="h-screen w-screen overflow-hidden fixed inset-0"
       style={{
         backgroundImage: `url(${xpWallpaper})`,
         backgroundSize: "cover",

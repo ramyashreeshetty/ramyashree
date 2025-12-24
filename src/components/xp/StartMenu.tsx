@@ -6,7 +6,7 @@ interface StartMenuProps {
 
 export const StartMenu = ({ onClose }: StartMenuProps) => {
   const menuItems = [
-    { icon: <User className="w-8 h-8" />, label: "About Me", description: "Learn about Ramya" },
+    { icon: <User className="w-8 h-8" />, label: "About Me", description: "Learn about Ramyashree" },
     { icon: <FolderOpen className="w-8 h-8" />, label: "Projects", description: "View my work" },
     { icon: <Heart className="w-8 h-8" />, label: "Hobbies", description: "What I love" },
     { icon: <Briefcase className="w-8 h-8" />, label: "Experience", description: "My journey" },
