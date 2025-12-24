@@ -20,48 +20,54 @@ export const StartMenu = ({ onClose }: StartMenuProps) => {
         className="fixed inset-0" 
         onClick={onClose}
       />
-      <div className="relative bg-gradient-to-b from-primary to-primary/80 rounded-tr-lg shadow-2xl overflow-hidden">
-        {/* Header */}
-        <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-primary/90 to-primary border-b border-primary-foreground/20">
-          <div className="w-12 h-12 rounded-md bg-white p-0.5">
-            <div className="w-full h-full rounded-sm bg-gradient-to-br from-pink-200 to-blue-200 flex items-center justify-center text-xl">
-              👩‍💻
+      <div className="relative bg-white rounded-tr-xl shadow-2xl overflow-hidden border border-slate-200">
+        {/* Header - classic XP blue header */}
+        <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-400">
+          <div className="w-12 h-12 rounded-md bg-white p-0.5 shadow-md">
+            <div className="w-full h-full rounded-sm bg-gradient-to-br from-rose-200 to-violet-200 flex items-center justify-center">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                {/* Simple cute face */}
+                <circle cx="14" cy="14" r="12" fill="#FEE2E2"/>
+                <circle cx="10" cy="12" r="2" fill="#374151"/>
+                <circle cx="18" cy="12" r="2" fill="#374151"/>
+                <path d="M10 18 Q14 21 18 18" stroke="#374151" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+              </svg>
             </div>
           </div>
-          <div className="text-primary-foreground">
-            <div className="font-bold">Ramyashree</div>
-            <div className="text-sm opacity-80">Data Engineer</div>
+          <div className="text-white">
+            <div className="font-bold text-lg">Ramyashree</div>
+            <div className="text-sm text-blue-100">Data Engineer</div>
           </div>
         </div>
 
         <div className="flex">
           {/* Left Panel - Programs */}
-          <div className="w-56 bg-card p-2">
+          <div className="w-56 bg-white p-2">
             {menuItems.map((item, index) => (
               <button
                 key={index}
                 onClick={onClose}
-                className="w-full flex items-center gap-3 p-2 rounded hover:bg-primary/10 transition-colors text-left"
+                className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 transition-colors text-left group"
               >
-                <div className="text-primary">{item.icon}</div>
+                <div className="text-blue-500 group-hover:text-blue-600 transition-colors">{item.icon}</div>
                 <div>
-                  <div className="font-medium text-foreground">{item.label}</div>
-                  <div className="text-xs text-muted-foreground">{item.description}</div>
+                  <div className="font-medium text-slate-700">{item.label}</div>
+                  <div className="text-xs text-slate-500">{item.description}</div>
                 </div>
               </button>
             ))}
           </div>
 
           {/* Right Panel - Quick Links */}
-          <div className="w-48 bg-primary/10 p-2 border-l border-border">
-            <div className="text-xs font-semibold text-muted-foreground uppercase mb-2 px-2">
+          <div className="w-48 bg-blue-50 p-2 border-l border-blue-100">
+            <div className="text-xs font-semibold text-slate-500 uppercase mb-2 px-2">
               Quick Links
             </div>
             <a
               href="https://github.com/ramya"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 p-2 rounded hover:bg-primary/10 text-foreground"
+              className="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-100 text-slate-700 transition-colors"
             >
               <Github className="w-5 h-5" />
               <span>GitHub</span>
@@ -70,15 +76,15 @@ export const StartMenu = ({ onClose }: StartMenuProps) => {
               href="https://linkedin.com/in/ramya"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 p-2 rounded hover:bg-primary/10 text-foreground"
+              className="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-100 text-slate-700 transition-colors"
             >
               <Linkedin className="w-5 h-5" />
               <span>LinkedIn</span>
             </a>
-            <div className="border-t border-border my-2" />
+            <div className="border-t border-blue-200 my-2" />
             <button
               onClick={onClose}
-              className="w-full flex items-center gap-2 p-2 rounded hover:bg-destructive/10 text-destructive"
+              className="w-full flex items-center gap-2 p-2 rounded-lg hover:bg-red-50 text-red-500 transition-colors"
             >
               <X className="w-5 h-5" />
               <span>Close Menu</span>

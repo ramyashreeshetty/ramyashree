@@ -2,60 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Soft Pastel Design System */
+/* Warm & Cozy Pastel Design System */
 
 @layer base {
   :root {
-    /* Light pastel cream/peach palette */
-    --background: 35 50% 96%;
-    --foreground: 25 30% 25%;
+    /* Warm cream/peach palette */
+    --background: 40 45% 96%;
+    --foreground: 25 25% 22%;
 
-    --card: 35 45% 98%;
-    --card-foreground: 25 30% 25%;
+    --card: 40 50% 98%;
+    --card-foreground: 25 25% 22%;
 
-    --popover: 35 45% 98%;
-    --popover-foreground: 25 30% 25%;
+    --popover: 40 50% 98%;
+    --popover-foreground: 25 25% 22%;
 
-    /* Soft coral/peach primary */
-    --primary: 15 70% 70%;
-    --primary-foreground: 25 30% 20%;
+    /* Soft warm coral primary */
+    --primary: 350 55% 72%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Soft cream */
-    --secondary: 40 40% 94%;
-    --secondary-foreground: 25 25% 35%;
+    /* Warm cream secondary */
+    --secondary: 40 50% 94%;
+    --secondary-foreground: 25 20% 35%;
 
-    --muted: 35 30% 92%;
-    --muted-foreground: 25 15% 50%;
+    --muted: 35 35% 92%;
+    --muted-foreground: 25 15% 45%;
 
-    /* Soft sage accent */
-    --accent: 140 35% 65%;
-    --accent-foreground: 140 30% 20%;
+    /* Soft lavender accent */
+    --accent: 260 45% 75%;
+    --accent-foreground: 260 30% 25%;
 
-    --destructive: 0 60% 70%;
+    --destructive: 0 55% 65%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 35 30% 85%;
-    --input: 35 30% 90%;
-    --ring: 15 70% 70%;
+    --border: 35 35% 85%;
+    --input: 35 35% 90%;
+    --ring: 350 55% 72%;
 
     --radius: 0.75rem;
 
-    /* XP Window colors - soft pastels */
-    --xp-title-start: 200 60% 70%;
-    --xp-title-end: 200 50% 60%;
-    --xp-window-bg: 35 50% 98%;
-    --xp-window-border: 35 30% 82%;
-    --xp-button-face: 35 35% 96%;
+    /* XP Window colors - soft warm pastels */
+    --xp-title-start: 220 50% 75%;
+    --xp-title-end: 220 45% 65%;
+    --xp-window-bg: 40 50% 98%;
+    --xp-window-border: 35 35% 82%;
+    --xp-button-face: 40 40% 96%;
     --xp-button-highlight: 0 0% 100%;
-    --xp-button-shadow: 35 20% 78%;
+    --xp-button-shadow: 35 25% 78%;
     
-    /* Taskbar - soft blue like XP */
-    --xp-taskbar: 210 55% 55%;
-    --xp-taskbar-light: 210 50% 65%;
-    --xp-start-green: 120 45% 50%;
+    /* Taskbar - soft blue like original XP */
+    --xp-taskbar: 215 60% 55%;
+    --xp-taskbar-light: 215 55% 65%;
+    --xp-start-green: 125 50% 48%;
     
     /* Desktop */
-    --xp-desktop: 200 60% 70%;
+    --xp-desktop: 200 55% 72%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -68,45 +68,45 @@
   }
 
   .dark {
-    --background: 220 20% 14%;
-    --foreground: 35 30% 92%;
+    --background: 25 15% 12%;
+    --foreground: 40 30% 92%;
 
-    --card: 220 18% 18%;
-    --card-foreground: 35 30% 92%;
+    --card: 25 15% 16%;
+    --card-foreground: 40 30% 92%;
 
-    --popover: 220 18% 18%;
-    --popover-foreground: 35 30% 92%;
+    --popover: 25 15% 16%;
+    --popover-foreground: 40 30% 92%;
 
-    --primary: 15 60% 60%;
+    --primary: 350 50% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 18% 24%;
-    --secondary-foreground: 35 25% 85%;
+    --secondary: 25 15% 22%;
+    --secondary-foreground: 40 25% 85%;
 
-    --muted: 220 15% 22%;
-    --muted-foreground: 35 15% 60%;
+    --muted: 25 12% 20%;
+    --muted-foreground: 40 15% 60%;
 
-    --accent: 140 30% 50%;
+    --accent: 260 35% 55%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 55% 55%;
+    --destructive: 0 50% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 28%;
-    --input: 220 15% 25%;
-    --ring: 15 60% 60%;
+    --border: 25 12% 26%;
+    --input: 25 12% 22%;
+    --ring: 350 50% 60%;
 
-    --xp-title-start: 200 50% 45%;
-    --xp-title-end: 200 45% 38%;
-    --xp-window-bg: 220 18% 20%;
-    --xp-window-border: 220 15% 32%;
-    --xp-button-face: 220 15% 25%;
-    --xp-button-highlight: 220 12% 32%;
-    --xp-button-shadow: 220 12% 18%;
-    --xp-taskbar: 210 40% 30%;
-    --xp-taskbar-light: 210 35% 40%;
-    --xp-start-green: 120 40% 40%;
-    --xp-desktop: 220 25% 22%;
+    --xp-title-start: 220 40% 45%;
+    --xp-title-end: 220 38% 38%;
+    --xp-window-bg: 25 15% 18%;
+    --xp-window-border: 25 12% 30%;
+    --xp-button-face: 25 12% 24%;
+    --xp-button-highlight: 25 10% 32%;
+    --xp-button-shadow: 25 10% 16%;
+    --xp-taskbar: 215 45% 32%;
+    --xp-taskbar-light: 215 40% 42%;
+    --xp-start-green: 125 42% 38%;
+    --xp-desktop: 25 18% 20%;
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -135,18 +135,18 @@
   .xp-title-bar {
     background: linear-gradient(
       180deg,
-      hsl(200 65% 72%) 0%,
-      hsl(200 60% 62%) 50%,
-      hsl(200 55% 55%) 100%
+      hsl(220 55% 78%) 0%,
+      hsl(220 50% 68%) 50%,
+      hsl(220 48% 62%) 100%
     );
   }
 
   .xp-title-bar-inactive {
     background: linear-gradient(
       180deg,
-      hsl(200 20% 75%) 0%,
-      hsl(200 15% 68%) 50%,
-      hsl(200 12% 62%) 100%
+      hsl(220 20% 78%) 0%,
+      hsl(220 15% 72%) 50%,
+      hsl(220 12% 68%) 100%
     );
   }
 
@@ -159,51 +159,82 @@
       hsl(var(--xp-button-face)) 100%
     );
     border: 1px solid hsl(var(--xp-button-shadow));
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
     transition: all 0.2s ease;
   }
 
   .xp-button:hover {
     background: linear-gradient(
       180deg,
-      hsl(35 50% 98%) 0%,
-      hsl(35 45% 92%) 100%
+      hsl(40 55% 99%) 0%,
+      hsl(40 50% 94%) 100%
     );
     transform: translateY(-1px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
   }
 
   .xp-button:active {
     transform: translateY(0);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   }
 
-  /* Soft Window */
+  /* Soft Window with animations */
   .xp-window {
     @apply rounded-xl overflow-hidden;
     border: 1px solid hsl(var(--xp-window-border));
     box-shadow: 
-      0 8px 30px rgba(0, 0, 0, 0.12),
+      0 10px 40px rgba(0, 0, 0, 0.1),
       0 0 0 1px hsl(var(--xp-button-highlight));
   }
 
-  /* XP-style Taskbar */
+  /* Window open animation */
+  .xp-window-enter {
+    animation: window-open 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .xp-window-exit {
+    animation: window-close 0.2s ease-out forwards;
+  }
+
+  @keyframes window-open {
+    0% {
+      opacity: 0;
+      transform: scale(0.85) translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes window-close {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.9) translateY(10px);
+    }
+  }
+
+  /* XP-style Taskbar - classic blue */
   .xp-taskbar {
     background: linear-gradient(
       180deg,
-      hsl(210 60% 58%) 0%,
-      hsl(210 65% 48%) 50%,
-      hsl(210 70% 42%) 100%
+      hsl(215 65% 60%) 0%,
+      hsl(215 70% 50%) 50%,
+      hsl(215 75% 42%) 100%
     );
   }
 
-  /* XP Start Button - green like original */
+  /* XP Start Button - classic green */
   .xp-start-button {
     background: linear-gradient(
       180deg,
-      hsl(120 50% 55%) 0%,
-      hsl(120 48% 45%) 50%,
-      hsl(120 45% 38%) 100%
+      hsl(125 55% 55%) 0%,
+      hsl(125 52% 45%) 50%,
+      hsl(125 48% 38%) 100%
     );
     border-radius: 0 12px 12px 0;
     font-weight: 700;
@@ -213,9 +244,9 @@
   .xp-start-button:hover {
     background: linear-gradient(
       180deg,
-      hsl(120 55% 60%) 0%,
-      hsl(120 52% 50%) 50%,
-      hsl(120 48% 42%) 100%
+      hsl(125 58% 60%) 0%,
+      hsl(125 55% 50%) 50%,
+      hsl(125 50% 42%) 100%
     );
   }
 
@@ -226,12 +257,12 @@
   }
 
   .desktop-icon:hover {
-    @apply bg-white/25;
+    @apply bg-white/30;
     transform: scale(1.05);
   }
 
   .desktop-icon.selected {
-    @apply bg-white/35;
+    @apply bg-white/40;
   }
 
   /* Animations */
@@ -272,6 +303,11 @@
     100% { opacity: 1; transform: translateY(0); }
   }
 
+  @keyframes bounce-gentle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
   .animate-mascot-idle {
     animation: mascot-idle 2.5s ease-in-out infinite;
   }
@@ -290,5 +326,9 @@
 
   .animate-fade-in {
     animation: fade-in 0.4s ease-out forwards;
+  }
+
+  .animate-bounce-gentle {
+    animation: bounce-gentle 2s ease-in-out infinite;
   }
 }

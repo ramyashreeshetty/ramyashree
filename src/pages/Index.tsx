@@ -51,6 +51,7 @@ const Index = () => {
   const handleLogin = () => {
     setShowWelcome(false);
     playSound("success");
+    // Music will auto-play on login
   };
 
   const handleLogout = () => {
@@ -127,8 +128,8 @@ const Index = () => {
         </XPWindow>
       ))}
 
-      {/* Music Player */}
-      <MusicPlayer />
+      {/* Music Player - auto-plays and movable */}
+      <MusicPlayer autoPlay={true} />
 
       {/* Cat Mascot - positioned on right side to not interfere with icons */}
       <CatMascot />
