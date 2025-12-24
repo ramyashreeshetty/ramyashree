@@ -102,6 +102,22 @@ export const FlowerGarden = () => {
     let mounted = true;
     let channelCleanup: (() => void) | null = null;
 
+    // These are injected at build time by Vite. If you deploy outside Lovable (e.g., GitHub Pages),
+    // you must configure them in your hosting provider's environment.
+    const hasBackendEnv = Boolean(
+      import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
+    );
+
+    if (!hasBackendEnv) {
+      setBackendError(
+        "This deployment is missing the backend environment variables (VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY)."
+      );
+      setIsLoading(false);
+      return () => {
+        mounted = false;
+      };
+    }
+
     (async () => {
       try {
         const mod = await import("@/integrations/supabase/client");
@@ -117,7 +133,8 @@ export const FlowerGarden = () => {
         if (!mounted) return;
 
         if (error) {
-          setBackendError("Could not load the garden right now.");
+          console.warn("FlowerGarden: fetch failed", { message: error.message });
+          setBackendError("Could not load the garden right now (connection error). Try Reload.");
         } else if (data) {
           setFlowers(
             data.map((f) => ({
@@ -158,13 +175,17 @@ export const FlowerGarden = () => {
             "postgres_changes",
             { event: "DELETE", schema: "public", table: "flowers" },
             async () => {
-              // Refetch on delete
-              const { data: fresh } = await mod.supabase
+              const { data: fresh, error: refreshError } = await mod.supabase
                 .from("flowers")
                 .select("*")
                 .order("created_at", { ascending: true });
 
               if (!mounted || !fresh) return;
+
+              if (refreshError) {
+                console.warn("FlowerGarden: refetch failed", { message: refreshError.message });
+                return;
+              }
 
               setFlowers(
                 fresh.map((f) => ({
@@ -185,12 +206,12 @@ export const FlowerGarden = () => {
         };
 
         setIsLoading(false);
-      } catch {
+      } catch (err) {
         if (!mounted) return;
-        // If env vars were removed in a hosting environment, the client init can fail.
-        setBackendError(
-          "Backend configuration is missing. If you redeployed elsewhere, add the required environment variables back."
-        );
+        console.warn("FlowerGarden: init failed", {
+          message: err instanceof Error ? err.message : String(err),
+        });
+        setBackendError("Garden failed to initialize. Try Reload.");
         setIsLoading(false);
       }
     })();
@@ -255,7 +276,7 @@ export const FlowerGarden = () => {
         </div>
         <p className="max-w-md text-sm text-muted-foreground">{backendError}</p>
         <p className="max-w-md text-xs text-muted-foreground">
-          Tip: in Lovable Cloud this is auto-managed; if you redeployed outside Lovable, ensure your host has the same VITE_ env vars.
+          If you’re viewing the app via Lovable preview/publish, this should be auto-managed. If you’re viewing a separate deployment (e.g. GitHub Pages/Netlify/Vercel), add those VITE_ env vars in that host’s environment settings and redeploy.
         </p>
         <button
           onClick={() => window.location.reload()}
