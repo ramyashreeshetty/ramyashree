@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Flower2, Sparkles, Trash2 } from "lucide-react";
-import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
+import { supabase } from "@/integrations/supabase/client";
 import { playSound } from "./SoundManager";
 
 interface FlowerData {
@@ -86,7 +86,6 @@ const FlowerSVG = ({ color, type }: { color: string; type: string }) => {
 };
 
 export const FlowerGarden = () => {
-  const supabaseRef = useRef<SupabaseClient<Database> | null>(null);
   const [flowers, setFlowers] = useState<FlowerData[]>([]);
   const [selectedColor, setSelectedColor] = useState(FLOWER_COLORS[0]);
   const [selectedType, setSelectedType] = useState<"tulip" | "rose" | "daisy">("tulip");
@@ -96,30 +95,10 @@ export const FlowerGarden = () => {
 
   useEffect(() => {
     let mounted = true;
-    let cleanup: (() => void) | null = null;
-
-    const hasEnv = Boolean(
-      import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
-    );
-
-    if (!hasEnv) {
-      setBackendError(
-        "Backend env vars are missing in this build (VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY), so the garden can't load."
-      );
-      setIsLoading(false);
-      return () => {
-        mounted = false;
-      };
-    }
 
     (async () => {
       try {
-        const mod = await import("@/integrations/supabase/client");
-        if (!mounted) return;
-
-        supabaseRef.current = mod.supabase;
-
-        const { data, error } = await mod.supabase
+        const { data, error } = await supabase
           .from("flowers")
           .select("*")
           .order("created_at", { ascending: true });
@@ -141,7 +120,7 @@ export const FlowerGarden = () => {
           );
         }
 
-        const channel = mod.supabase
+        const channel = supabase
           .channel("flowers-realtime")
           .on(
             "postgres_changes",
@@ -166,11 +145,11 @@ export const FlowerGarden = () => {
           )
           .subscribe();
 
-        cleanup = () => {
-          mod.supabase.removeChannel(channel);
-        };
-
         setIsLoading(false);
+
+        return () => {
+          supabase.removeChannel(channel);
+        };
       } catch {
         if (!mounted) return;
         setBackendError("Garden failed to initialize. Please try Reload.");
@@ -180,13 +159,10 @@ export const FlowerGarden = () => {
 
     return () => {
       mounted = false;
-      cleanup?.();
     };
   }, []);
 
   const handleGardenClick = async (e: React.MouseEvent<HTMLDivElement>) => {
-    const supabase = supabaseRef.current;
-    if (!supabase) return;
 
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
