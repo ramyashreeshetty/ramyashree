@@ -6,9 +6,16 @@ interface MusicPlayerProps {
   autoPlay?: boolean;
 }
 
+const TRACKS = [
+  { id: "fjOeJssZX_Q", name: "music - beats" },
+  { id: "ZRtdQ81jPUQ", name: "music - beats" },
+  { id: "3eytpBOkOFA", name: "music - beats" },
+];
+
 export const MusicPlayer = ({ autoPlay = false }: MusicPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [isMuted, setIsMuted] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState(0);
   const [position, setPosition] = useState({ x: window.innerWidth - 280, y: 80 });
   const [isDragging, setIsDragging] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -51,6 +58,19 @@ export const MusicPlayer = ({ autoPlay = false }: MusicPlayerProps) => {
     playSound("click");
   };
 
+  const nextTrack = () => {
+    setCurrentTrack((prev) => (prev + 1) % TRACKS.length);
+    playSound("click");
+  };
+
+  const prevTrack = () => {
+    setCurrentTrack((prev) => (prev - 1 + TRACKS.length) % TRACKS.length);
+    playSound("click");
+  };
+
+  const currentVideoId = TRACKS[currentTrack].id;
+  const currentTrackName = TRACKS[currentTrack].name;
+
   return (
     <div
       className="fixed z-40 select-none"
@@ -60,10 +80,11 @@ export const MusicPlayer = ({ autoPlay = false }: MusicPlayerProps) => {
       {isPlaying && (
         <iframe
           ref={iframeRef}
+          key={currentVideoId}
           className="hidden"
           width="0"
           height="0"
-          src={`https://www.youtube.com/embed/q0ff3e-A7DY?autoplay=1&loop=1&playlist=q0ff3e-A7DY${isMuted ? "&mute=1" : ""}`}
+          src={`https://www.youtube.com/embed/${currentVideoId}?autoplay=1&loop=1&playlist=${currentVideoId}${isMuted ? "&mute=1" : ""}`}
           allow="autoplay"
         />
       )}
@@ -99,7 +120,7 @@ export const MusicPlayer = ({ autoPlay = false }: MusicPlayerProps) => {
         >
           {/* Title bar */}
           <div className="bg-gradient-to-r from-violet-200 to-violet-300 px-3 py-1.5 flex items-center justify-between border-b border-slate-400">
-            <span className="text-xs font-semibold text-slate-600">♪ lo-fi beats</span>
+            <span className="text-xs font-semibold text-slate-600 truncate">♪ {currentTrackName}</span>
             <div className="flex gap-1">
               <div className="w-2 h-2 rounded-full bg-pink-400"/>
               <div className="w-2 h-2 rounded-full bg-rose-500"/>
@@ -134,7 +155,10 @@ export const MusicPlayer = ({ autoPlay = false }: MusicPlayerProps) => {
             </button>
 
             {/* Prev */}
-            <button className="p-1 hover:bg-violet-100 rounded transition-colors">
+            <button 
+              onClick={prevTrack}
+              className="p-1 hover:bg-violet-100 rounded transition-colors"
+            >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <rect x="2" y="3" width="2" height="8" fill="#374151"/>
                 <path d="M12 3L6 7L12 11V3Z" fill="#374151"/>
@@ -157,7 +181,10 @@ export const MusicPlayer = ({ autoPlay = false }: MusicPlayerProps) => {
             </button>
 
             {/* Next */}
-            <button className="p-1 hover:bg-violet-100 rounded transition-colors">
+            <button 
+              onClick={nextTrack}
+              className="p-1 hover:bg-violet-100 rounded transition-colors"
+            >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <rect x="10" y="3" width="2" height="8" fill="#374151"/>
                 <path d="M2 3L8 7L2 11V3Z" fill="#374151"/>

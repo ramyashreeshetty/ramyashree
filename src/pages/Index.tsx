@@ -65,8 +65,8 @@ const Index = () => {
   const openWindow = (id: WindowId) => {
     if (!openWindows.includes(id)) {
       setOpenWindows([...openWindows, id]);
-      playSound("popup");
     }
+    playSound("click");
     // Restore if minimized
     setMinimizedWindows(minimizedWindows.filter(w => w !== id));
     setActiveWindow(id);
