@@ -9,7 +9,7 @@ import { FlowerGarden } from "@/components/xp/FlowerGarden";
 import { WelcomeScreen } from "@/components/xp/WelcomeScreen";
 import { AboutSection, ProjectsSection, HobbiesSection, ExperienceSection, VisionSection, ContactSection } from "@/components/xp/ContentSections";
 import { playSound } from "@/components/xp/SoundManager";
-import desktopWallpaper from "@/assets/desktop-wallpaper.png";
+import xpWallpaper from "@/assets/xp-wallpaper.jpg";
 
 type WindowId = "about" | "projects" | "hobbies" | "experience" | "vision" | "contact" | "garden";
 
@@ -103,7 +103,7 @@ const Index = () => {
     <div 
       className="h-screen w-screen overflow-hidden fixed inset-0"
       style={{
-        backgroundImage: `url(${desktopWallpaper})`,
+        backgroundImage: `url(${xpWallpaper})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
