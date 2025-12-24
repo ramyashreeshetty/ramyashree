@@ -64,7 +64,7 @@ export const StartMenu = ({ onClose }: StartMenuProps) => {
               Quick Links
             </div>
             <a
-              href="https://github.com/ramya"
+              href="https://github.com/ramyashreeshetty"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-100 text-slate-700 transition-colors"
@@ -73,7 +73,7 @@ export const StartMenu = ({ onClose }: StartMenuProps) => {
               <span>GitHub</span>
             </a>
             <a
-              href="https://linkedin.com/in/ramya"
+              href="https://www.linkedin.com/in/ramyashree-shetty/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-100 text-slate-700 transition-colors"
