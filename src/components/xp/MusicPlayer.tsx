@@ -7,6 +7,7 @@ interface MusicPlayerProps {
 }
 
 const TRACKS = [
+  { id: "AMcVJmb5mvk", name: "music - beats" },
   { id: "fjOeJssZX_Q", name: "music - beats" },
   { id: "ZRtdQ81jPUQ", name: "music - beats" },
   { id: "3eytpBOkOFA", name: "music - beats" },
