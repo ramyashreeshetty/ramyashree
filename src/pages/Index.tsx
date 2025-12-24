@@ -100,16 +100,14 @@ const Index = () => {
   }
 
   return (
-    <div className="h-screen w-screen overflow-hidden fixed inset-0 bg-[#0a1628]">
-      {/* Rotated wallpaper background */}
-      <div 
-        className="absolute inset-0 rotate-90 origin-center scale-[1.8]"
-        style={{
-          backgroundImage: `url(${desktopWallpaper})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
+    <div 
+      className="h-screen w-screen overflow-hidden fixed inset-0"
+      style={{
+        backgroundImage: `url(${desktopWallpaper})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       {/* Desktop Icons - single column, stays above taskbar */}
       <div className="absolute top-2 left-2 bottom-14 flex flex-col flex-wrap gap-1 content-start">
         {DESKTOP_ICONS.map((icon) => (
